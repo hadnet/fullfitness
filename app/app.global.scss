@@ -1,0 +1,60 @@
+/*
+ * @NOTE: Prepend a `~` to css file paths that are in your node_modules
+ *        See https://github.com/webpack-contrib/sass-loader#imports
+ */
+@import "~@fortawesome/fontawesome-free/css/all.css";
+::selection {
+  background: gray;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  cursor:  default !important;
+  -webkit-app-region: drag; 
+  user-select: none;
+  outline-style: none;
+  outline-color: transparent;
+}
+
+body {
+  position: relative;
+  color: white;
+  height: 100vh;
+  background-color: #232c39;
+  background-image: linear-gradient(45deg, rgba(64, 84, 178, 0.5) 10%, rgba(64, 84, 178, 1));
+  font-family: Arial, Helvetica, Helvetica Neue, serif;
+  overflow-y: hidden;
+}
+
+input {
+  -webkit-app-region: no-drag !important;
+  user-select: text !important;
+  cursor: text !important;
+}
+
+h2 {
+  margin: 0;
+  font-size: 2.25rem;
+  font-weight: bold;
+  letter-spacing: -0.025em;
+  color: #fff;
+}
+
+p {
+  font-size: 24px;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+  cursor: pointer;
+}
