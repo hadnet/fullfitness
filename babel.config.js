@@ -62,7 +62,7 @@ module.exports = api => {
       require('@babel/plugin-proposal-private-methods'),
       require('@babel/plugin-proposal-json-strings'),
 
-      //React Fragments
+      // React Fragments
       require('@babel/plugin-transform-react-jsx'),
 
       ...(development ? developmentPlugins : productionPlugins)
