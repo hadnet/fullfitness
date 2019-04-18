@@ -8,6 +8,10 @@ export type Action = {
   +type: string
 };
 
+export type State = {
+  +stateProp: string
+};
+
 export type GetState = () => counterStateType;
 
 export type Dispatch = ReduxDispatch<Action>;
