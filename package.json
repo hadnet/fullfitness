@@ -108,7 +108,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fullfitness.git"
+    "url": "git+https://github.com/hadnet/fullfitness.git"
   },
   "author": {
     "name": "Hadnet",
@@ -124,7 +124,7 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/fullfitness/issues"
+    "url": "https://github.com/hadnet/fullfitness/issues"
   },
   "keywords": [
     "electron",
@@ -136,7 +136,7 @@
     "hot",
     "reload"
   ],
-  "homepage": "https://github.com/fullfitness/#readme",
+  "homepage": "https://github.com/hadnet/fullfitness/#readme",
   "jest": {
     "testURL": "http://localhost/",
     "moduleNameMapper": {
