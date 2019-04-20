@@ -4,7 +4,7 @@ import Appbar from '../components/Appbar';
 
 type Props = {};
 
-export default class HomePage extends Component<Props> {
+export default class AppBar extends Component<Props> {
   props: Props;
 
   render() {

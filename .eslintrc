@@ -44,6 +44,7 @@
     "promise/catch-or-return": "error",
     "promise/no-native": "off",
     "react/no-unused-prop-types": "warn",
+    "react/prop-types": "off",
     "react/sort-comp": [
       "error",
       {

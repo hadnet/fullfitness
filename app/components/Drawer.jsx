@@ -1,8 +1,7 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
-import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
@@ -13,26 +12,28 @@ import MailIcon from '@material-ui/icons/Mail';
 
 const styles = {
   list: {
-    width: 250,
+    width: 250
   },
   fullList: {
-    width: 'auto',
-  },
+    width: 'auto'
+  }
 };
 
 class TemporaryDrawer extends React.Component {
   render() {
-    const { classes } = this.props;
+    const { open, onClose, classes } = this.props;
 
     const sideList = (
       <div className={classes.list}>
         <List>
           {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <Link to="/Dashboard" key={text}>
-            <ListItem button >
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
+            <Link to={index % 2 === 0 ? '/Dashboard' : '/Login'} key={text}>
+              <ListItem button>
+                <ListItemIcon>
+                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                </ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItem>
             </Link>
           ))}
         </List>
@@ -40,29 +41,9 @@ class TemporaryDrawer extends React.Component {
         <List>
           {['All mail', 'Trash', 'Spam'].map((text, index) => (
             <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-      </div>
-    );
-
-    const fullList = (
-      <div className={classes.fullList}>
-        <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+              <ListItemIcon>
+                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              </ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}
@@ -72,12 +53,12 @@ class TemporaryDrawer extends React.Component {
 
     return (
       <div>
-        <Drawer open={this.props.open} onClose={ this.props.onClose(false)}>
+        <Drawer open={open} onClose={onClose(false)}>
           <div
             tabIndex={0}
             role="button"
-            onClick={this.props.onClose(false)}
-            onKeyDown={this.props.onClose(false)}
+            onClick={onClose(false)}
+            onKeyDown={onClose(false)}
           >
             {sideList}
           </div>
