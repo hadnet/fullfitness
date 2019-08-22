@@ -253,10 +253,11 @@ export default merge.smart(baseConfig, {
       ignored: /node_modules/,
       poll: 100
     },
-    historyApiFallback: {
-      verbose: true,
-      disableDotRule: false
-    },
+    historyApiFallback: true,
+    // historyApiFallback: {
+    //   verbose: true,
+    //   disableDotRule: false
+    // },
     before() {
       if (process.env.START_HOT) {
         console.log('Starting Main Process...');

@@ -15,6 +15,9 @@ import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
 
+if (app.getGPUFeatureStatus().gpu_compositing.includes('disabled')) {
+  app.disableHardwareAcceleration();
+}
 export default class AppUpdater {
   constructor() {
     log.transports.file.level = 'info';
@@ -52,50 +55,46 @@ const installExtensions = async () => {
  */
 
 function createMainWindow() {
-  mainWindow = new BrowserWindow(
-    {
-      show: false,
-      title: "FoxBot",
-      width: 900,
-      minWidth: 600,
-      maxWidth: 1250,
-      height: 650,
-      minHeight: 650,
-      maxHeight: 800,
-      titleBarStyle: "hidden",
-      frame: false,
-      backgroundColor: "#4054B2",
-      maximizable: false,
-      fullscreenable: false,
-    },
-  );
-  
+  mainWindow = new BrowserWindow({
+    show: false,
+    title: 'fullfitness',
+    width: 900,
+    minWidth: 600,
+    maxWidth: 1250,
+    height: 650,
+    minHeight: 650,
+    maxHeight: 800,
+    titleBarStyle: 'hidden',
+    frame: false,
+    backgroundColor: '#4054B2',
+    maximizable: false,
+    fullscreenable: false,
+    webPreferences: {
+      nodeIntegration: true,
+      nodeIntegrationInWorker: true
+    }
+  });
+
   mainWindow.loadURL(`file://${__dirname}/app.html`);
-  mainWindow.once(
-    "ready-to-show",
-    () => {
-      if (!mainWindow) {
-        throw new Error('"mainWindow" is not defined');
-      }
-      if (process.env.START_MINIMIZED) {
-        mainWindow.minimize();
-      } else {
-        mainWindow.show();
-        mainWindow.focus();
-      }
-    },
-  );
-  
-  mainWindow.on(
-    "closed",
-    () => {
-      mainWindow = null;
-    },
-  );
-  
+  mainWindow.once('ready-to-show', () => {
+    if (!mainWindow) {
+      throw new Error('"mainWindow" is not defined');
+    }
+    if (process.env.START_MINIMIZED) {
+      mainWindow.minimize();
+    } else {
+      mainWindow.show();
+      mainWindow.focus();
+    }
+  });
+
+  mainWindow.on('closed', () => {
+    mainWindow = null;
+  });
+
   const menuBuilder = new MenuBuilder(mainWindow);
   menuBuilder.buildMenu();
-  
+
   new AppUpdater();
 }
 
@@ -107,28 +106,22 @@ app.on('window-all-closed', () => {
   }
 });
 
-(app.on(
-  "activate",
-  () => {
-    if (mainWindow == null) {
-      createMainWindow();
-    } else {
-      mainWindow.show();
-      mainWindow.focus();
-    }
-  },
-));
-
-(app.on(
-  "ready",
-  async () => {
-    if (
-      process.env.NODE_ENV === "development" ||
-        process.env.DEBUG_PROD === "true"
-    ) {
-      await installExtensions();
-    }
-    
+app.on('activate', () => {
+  if (mainWindow == null) {
     createMainWindow();
-  },
-));
+  } else {
+    mainWindow.show();
+    mainWindow.focus();
+  }
+});
+
+app.on('ready', async () => {
+  if (
+    process.env.NODE_ENV === 'development' ||
+    process.env.DEBUG_PROD === 'true'
+  ) {
+    await installExtensions();
+  }
+
+  createMainWindow();
+});
